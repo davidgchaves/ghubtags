@@ -1,9 +1,11 @@
-import React      from 'react';
-import { render } from 'react-dom';
+import Router from './router';
 
-const Hello = () => <div>Hello David</div>;
+window.app = {
+  // main entry point for our App
+  init () {
+    this.router = new Router();
+    this.router.history.start();
+  }
+};
 
-render(
-  <Hello />,
-  document.body
-);
+window.app.init();
