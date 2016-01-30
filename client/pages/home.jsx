@@ -1,7 +1,9 @@
 import React from 'react';
 
+import NavHelper from '../components/nav-helper'
+
 const Home = () => (
-  <div className='container'>
+  <NavHelper className='container'>
     <header role='banner'>
       <h1>gHubTags</h1>
     </header>
@@ -11,7 +13,7 @@ const Home = () => (
         <span className='mega-octicon octicon-mark-github'></span> Login with GitHub
       </a>
     </div>
-  </div>
+  </NavHelper>
 );
 
 export default Home;
