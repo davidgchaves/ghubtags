@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import localLinks           from 'local-links';
+import app                  from 'ampersand-app';
 
 class NavHelper extends Component {
   onClick (e) {
