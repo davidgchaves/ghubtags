@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React          from 'react';
+import ampersandMixin from 'ampersand-react-mixin'
 
 import NavHelper from './components/nav-helper'
 
-class Layout extends Component {
+export default React.createClass({
+  mixins: [ampersandMixin],
+
+  displayName: 'Layout',
+
   render () {
+    const { me } = this.props;
     return (
       <NavHelper>
 
@@ -13,7 +19,9 @@ class Layout extends Component {
           <ul className='list-unstyled list-inline cf'>
             <li>gHubTags</li>
             <li><a href='/repos'>Repos</a></li>
-            <li className='pull-right'><a href='/logout'>Logout</a></li>
+            <li className='pull-right'>
+              <a href='/logout'>Logout</a> {me.login}
+            </li>
           </ul>
         </nav>
 
@@ -24,6 +32,4 @@ class Layout extends Component {
       </NavHelper>
     );
   }
-}
-
-export default Layout;
+});

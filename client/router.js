@@ -12,7 +12,7 @@ import ReposPage from './pages/repos';
 export default Router.extend({
   renderPage (page, opts = {wrapInLayout: true}) {
     opts.wrapInLayout
-      ? render(<Layout>{page}</Layout>,
+      ? render(<Layout me={app.me}>{page}</Layout>,
                document.body)
       : render(page,
                document.body);

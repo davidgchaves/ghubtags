@@ -56,6 +56,7 @@
   "dependencies": {
     "ampersand-app": "^1.0.4",
     "ampersand-model": "^6.0.2",
+    "ampersand-react-mixin": "^1.0.1",
     "ampersand-router": "^3.0.2",
     "local-links": "^1.4.0",
     "qs": "^6.0.2",

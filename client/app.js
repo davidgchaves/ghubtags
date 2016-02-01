@@ -12,6 +12,7 @@ app.extend({
   // main entry point for our App
   init () {
     this.me = new Me();
+    this.me.fetchInitialData();
     this.router = new Router();
     this.router.history.start();
   }
