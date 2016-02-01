@@ -1,7 +1,9 @@
 import React      from 'react';
 import { render } from 'react-dom';
+import app        from 'ampersand-app';
 import Router     from 'ampersand-router';
 import qs         from 'qs';
+import xhr        from 'xhr';
 
 import Layout    from './layout';
 import HomePage  from './pages/home';
@@ -17,9 +19,10 @@ export default Router.extend({
   },
 
   routes: {
-    ''     : 'home',
-    'repos': 'repos',
-    'login': 'login'
+    ''                    : 'home',
+    'repos'               : 'repos',
+    'login'               : 'login',
+    'auth/callback?:query': 'authCallback'
   },
 
   home () {
@@ -44,5 +47,17 @@ export default Router.extend({
                       + '/auth/callback',
         scope: 'user,repo'
       });
+  },
+
+  authCallback (query) {
+    const authCode = qs.parse(query).code;
+    xhr({
+      url: 'https://ghubtags-localhost.herokuapp.com/authenticate/'
+           + authCode,
+      json: true
+    }, (err, req, body) => {
+      app.me.token = body.token;
+      this.redirectTo('/repos');
+    });
   }
 });
