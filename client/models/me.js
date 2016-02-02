@@ -1,38 +1,35 @@
 import Model from 'ampersand-model';
 
-export default Model.extend({
-  url: 'https://api.github.com/user',
+import githubAuthMixin from '../helpers/github-auth-mixin';
 
-  initialize () {
-    this.token = window.localStorage.token;
+export default Model.extend(
+  githubAuthMixin,
+  {
+    url: 'https://api.github.com/user',
 
-    this.on('change:token', this.onTokenChange);
-  },
+    initialize () {
+      this.token = window.localStorage.token;
 
-  props: {
-    login: 'string'
-  },
+      this.on('change:token', this.onTokenChange);
+    },
 
-  session: {
-    token: 'string'
-  },
+    props: {
+      login: 'string'
+    },
 
-  ajaxConfig () {
-    return {
-      headers: {
-        Authorization: 'token' + ' ' + this.token
+    session: {
+      token: 'string'
+    },
+
+    onTokenChange () {
+      window.localStorage.token = this.token;
+      this.fetchInitialData();
+    },
+
+    fetchInitialData () {
+      if (this.token) {
+        this.fetch();
       }
-    };
-  },
-
-  onTokenChange () {
-    window.localStorage.token = this.token;
-    this.fetchInitialData();
-  },
-
-  fetchInitialData () {
-    if (this.token) {
-      this.fetch();
     }
   }
-});
+);
