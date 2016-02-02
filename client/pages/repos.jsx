@@ -15,6 +15,8 @@ export default React.createClass({
         <ul>
           {repos.map(r =>
             (<li key={r.id}>
+              <span className="octicon octicon-repo"></span>
+              {" "}
               <a href="">{r.full_name}</a>
             </li>)
           )}
