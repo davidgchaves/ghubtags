@@ -5,9 +5,10 @@ import Router     from 'ampersand-router';
 import qs         from 'qs';
 import xhr        from 'xhr';
 
-import Layout    from './layout';
-import HomePage  from './pages/home';
-import ReposPage from './pages/repos';
+import Layout     from './layout';
+import HomePage   from './pages/home';
+import ReposPage  from './pages/repos';
+import RepoDetail from './pages/repo-detail';
 
 export default Router.extend({
   renderPage (page, opts = {wrapInLayout: true}) {
@@ -23,7 +24,8 @@ export default Router.extend({
     'repos'               : 'repos',
     'login'               : 'login',
     'auth/callback?:query': 'authCallback',
-    'logout'              : 'logout'
+    'logout'              : 'logout',
+    'repo/:owner/:name'   : 'repoDetail'
   },
 
   home () {
@@ -65,5 +67,10 @@ export default Router.extend({
   logout () {
     window.localStorage.clear();
     window.location = '/';
+  },
+
+  repoDetail (owner, name) {
+    const model = app.me.repos.getByFullName(owner + '/' + name);
+    this.renderPage(<RepoDetail repo={model} />);
   }
 });

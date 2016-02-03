@@ -1,6 +1,14 @@
 import Model from 'ampersand-model';
 
-export default Model.extend({
+import githubAuthMixin from '../helpers/github-auth-mixin';
+
+export default Model.extend(
+  githubAuthMixin,
+  {
+  url () {
+    return 'https://api.github.com/repos/' + this.full_name;
+  },
+
   props: {
     id: 'number',
     full_name: 'string'
