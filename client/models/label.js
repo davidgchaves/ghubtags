@@ -21,7 +21,10 @@ export default Model.extend(
     },
 
     update (attributes) {
-      const oldAttributes = this.attributes;
+      const oldAttributes = this.getAttributes({
+        props: true,
+        session: false
+      });
 
       xhr({
         url: this.url(),
