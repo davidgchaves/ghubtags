@@ -3,7 +3,7 @@ import React from 'react';
 const LabelItem = ({ label }) => {
   const cssColor = '#' + label.color;
 
-  const editingLabel = (
+  const editLabel = (
     <div>
       <form className='label'>
         <span className='label-color avatar avatar-small avatar-rounded'>&nbsp;</span>
