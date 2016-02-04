@@ -34,6 +34,14 @@ export default React.createClass({
     });
   },
 
+  onSubmit (e) {
+    e.preventDefault();
+
+    const { label } = this.props;
+    label.update(this.state);
+    label.editing = false;
+  },
+
   getInitialState () {
     const { name, color } = this.props.label;
 
@@ -50,7 +58,7 @@ export default React.createClass({
 
     const editLabel = (
       <div>
-        <form className='label'>
+        <form onSubmit={this.onSubmit} className='label'>
           <span style={{backgroundColor: cssColor}} className='label-color avatar avatar-small avatar-rounded'>&nbsp;</span>
           <input name='name' onChange={this.onNameChange} value={name} />
           <input name='color' onChange={this.onColorChange} value={cssColor} />
