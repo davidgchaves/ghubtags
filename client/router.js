@@ -70,6 +70,8 @@ export default Router.extend({
       app.me.token = body.token;
       this.redirectTo('/repos');
     });
+
+    this.renderPage(<MessagePage title='Fetching your data' />);
   },
 
   logout () {
