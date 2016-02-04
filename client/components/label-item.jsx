@@ -11,6 +11,10 @@ export default React.createClass({
     this.props.label.editing = true;
   },
 
+  onCancelClick () {
+    this.props.label.editing = false;
+  },
+
   render () {
     const { label } = this.props;
     const cssColor = '#' + label.color;
@@ -22,7 +26,7 @@ export default React.createClass({
           <input name='name'/>
           <input name='color'/>
           <button type='submit' className='button button-small'>Save</button>
-          <button type='button' className='button button-small button-unstyled'>cancel</button>
+          <button onClick={this.onCancelClick} type='button' className='button button-small button-unstyled'>cancel</button>
         </form>
       </div>
     );
