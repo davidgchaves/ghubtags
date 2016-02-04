@@ -1,15 +1,22 @@
 import Model from 'ampersand-model';
 
-export default Model.extend({
-  props: {
-    name: 'string',
-    color: 'string'
-  },
+import githubAuthMixin from '../helpers/github-auth-mixin';
 
-  session: {
-    editing: {
-      type: 'boolean',
-      default: false
+export default Model.extend(
+  githubAuthMixin,
+  {
+    idAttribute: 'name',
+
+    props: {
+      name: 'string',
+      color: 'string'
+    },
+
+    session: {
+      editing: {
+        type: 'boolean',
+        default: false
+      }
     }
   }
-});
+);
