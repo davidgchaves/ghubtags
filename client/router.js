@@ -10,6 +10,7 @@ import HomePage    from './pages/home';
 import ReposPage   from './pages/repos';
 import RepoDetail  from './pages/repo-detail';
 import MessagePage from './pages/message';
+import config      from './config';
 
 const requiresAuth = (handlerName) => {
   return function () {
@@ -53,7 +54,7 @@ export default Router.extend({
       'https://github.com/login/oauth/authorize' +
       '?' +
       qs.stringify({
-        client_id: '1d8ed4a7f1d79e0fe930',
+        client_id: config.clientId,
         redirect_uri: window.location.origin
                       + '/auth/callback',
         scope: 'user,repo'
@@ -63,7 +64,8 @@ export default Router.extend({
   authCallback (query) {
     const authCode = qs.parse(query).code;
     xhr({
-      url: 'https://ghubtags-localhost.herokuapp.com/authenticate/'
+      url: config.authUrl
+           + '/'
            + authCode,
       json: true
     }, (err, req, body) => {

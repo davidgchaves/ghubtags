@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack",
-    "deploy": "npm run build && surge -p public -d somedomain.com",
+    "deploy": "surge -p public -d ghubtags.surge.sh",
     "start": "hjs-dev-server",
     "test_with_karma": "karma start karma.config.js",
     "test_with_karma:watch": "npm run test_with_karma -- --watch",
@@ -14,7 +14,7 @@
     "test_with_mocha:watch": "npm test -- --watch",
     "test": "npm run test_with_karma",
     "test:watch": "npm run test_with_karma:watch",
-    "yolo": "git add --all && git commit -am \"$(date)\" && npm version minor && git push origin master --tags && npm run build && npm run deploy"
+    "yolo": "npm run build && npm run deploy"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
@@ -48,6 +48,7 @@
     "sinon": "^1.17.2",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.5.1",
+    "surge": "^0.17.7",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1",
