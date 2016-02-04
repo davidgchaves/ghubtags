@@ -38,7 +38,7 @@ export default React.createClass({
     e.preventDefault();
 
     const { label } = this.props;
-    label.update(this.state);
+    label.saved ? label.update(this.state) : label.save(this.state);
     label.editing = false;
   },
 
