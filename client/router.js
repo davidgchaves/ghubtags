@@ -5,10 +5,11 @@ import Router     from 'ampersand-router';
 import qs         from 'qs';
 import xhr        from 'xhr';
 
-import Layout     from './layout';
-import HomePage   from './pages/home';
-import ReposPage  from './pages/repos';
-import RepoDetail from './pages/repo-detail';
+import Layout      from './layout';
+import HomePage    from './pages/home';
+import ReposPage   from './pages/repos';
+import RepoDetail  from './pages/repo-detail';
+import MessagePage from './pages/message';
 
 const requiresAuth = (handlerName) => {
   return function () {
@@ -33,7 +34,8 @@ export default Router.extend({
     'login'               : 'login',
     'auth/callback?:query': 'authCallback',
     'logout'              : 'logout',
-    'repo/:owner/:name'   : requiresAuth('repoDetail')
+    'repo/:owner/:name'   : requiresAuth('repoDetail'),
+    '*fourOhFour'         : 'fourOhFour'
   },
 
   home () {
@@ -46,8 +48,6 @@ export default Router.extend({
     this.renderPage(<ReposPage repos={app.me.repos} />);
   },
 
-  // More info at:
-  //   https://developer.github.com/v3/oauth/#web-application-flow
   login () {
     window.location =
       'https://github.com/login/oauth/authorize' +
@@ -80,5 +80,9 @@ export default Router.extend({
   repoDetail (owner, name) {
     const model = app.me.repos.getByFullName(owner + '/' + name);
     this.renderPage(<RepoDetail repo={model} labels={model.labels} />);
+  },
+
+  fourOhFour () {
+    this.renderPage(<MessagePage title='Not Found' body='It is not here, sorry!' />);
   }
 });
