@@ -10,7 +10,6 @@ export default React.createClass({
 
   render () {
     const { repo, labels } = this.props;
-    console.log(labels);
 
     return (
       <div className='container'>
