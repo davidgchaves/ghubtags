@@ -10,6 +10,14 @@ import HomePage   from './pages/home';
 import ReposPage  from './pages/repos';
 import RepoDetail from './pages/repo-detail';
 
+const requiresAuth = (handlerName) => {
+  return function () {
+    app.me.token
+      ? this[handlerName].apply(this, arguments)
+      : this.redirectTo('/');
+  };
+};
+
 export default Router.extend({
   renderPage (page, opts = {wrapInLayout: true}) {
     opts.wrapInLayout
@@ -21,11 +29,11 @@ export default Router.extend({
 
   routes: {
     ''                    : 'home',
-    'repos'               : 'repos',
+    'repos'               : requiresAuth('repos'),
     'login'               : 'login',
     'auth/callback?:query': 'authCallback',
     'logout'              : 'logout',
-    'repo/:owner/:name'   : 'repoDetail'
+    'repo/:owner/:name'   : requiresAuth('repoDetail')
   },
 
   home () {
