@@ -14,7 +14,14 @@ export default React.createClass({
 
   onCancelClick (e) {
     e.preventDefault();
-    this.props.label.editing = false;
+
+    const { label } = this.props;
+    if (label.saved) {
+      label.editing = false;
+      this.setState(this.getInitialState());
+    } else {
+      label.destroy();
+    }
   },
 
   onDeleteClick (e) {
